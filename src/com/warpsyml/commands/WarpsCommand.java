@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import com.warpsyml.entities.Warp;
+import com.warpsyml.services.MessageService;
 import com.warpsyml.services.WarpService;
 
 public class WarpsCommand implements CommandExecutor {
@@ -14,7 +15,7 @@ public class WarpsCommand implements CommandExecutor {
 		Warp[] warpList = WarpService.warpList();
 		
 		if(warpList.length < 1) {
-			sender.sendMessage("No warp has been set.");
+			MessageService.sendError(sender, "No warp has been set.");
 			return true;
 		}
 		

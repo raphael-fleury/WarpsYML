@@ -1,6 +1,5 @@
 package com.warpsyml.services;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -9,14 +8,14 @@ import com.warpsyml.entities.Colors;
 
 public class ColorService {
 
-	public static Colors DEFAULT = new Colors(ChatColor.RED, ChatColor.GREEN, ChatColor.WHITE);
+	public static final Colors DEFAULT = new Colors(ChatColor.RED, ChatColor.GREEN, ChatColor.WHITE);
 	
 	public static ChatColor stringToColor(String text, ChatColor def) {
 		try {
             ChatColor color = ChatColor.valueOf(text);
             return color;
         } catch (java.lang.IllegalArgumentException ex) {
-        	Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Invalid color: " + text);
+        	MessageService.ConsoleLog("[WarpsYML] " + MessageService.error("Invalid color: " + text));
             return def;
         }
 	}

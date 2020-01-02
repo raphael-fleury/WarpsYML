@@ -2,6 +2,8 @@ package com.warpsyml.entities;
 
 import org.bukkit.ChatColor;
 
+import com.warpsyml.entities.enums.MessageType;
+
 public class Colors {
 
 	public ChatColor error;
@@ -12,5 +14,19 @@ public class Colors {
 		this.error = error;
 		this.success = success;
 		this.neutral = neutral;
+	}
+	
+	public ChatColor getColor(MessageType type) {
+		switch (type) {
+			case NEUTRAL:
+				return neutral;
+			case SUCCESS:
+				return success;
+			case ERROR:
+				return error;
+
+			default:
+				return neutral;
+		}
 	}
 }

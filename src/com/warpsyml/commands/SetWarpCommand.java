@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import com.warpsyml.entities.Warp;
+import com.warpsyml.services.MessageService;
 import com.warpsyml.services.WarpService;
 
 public class SetWarpCommand implements CommandExecutor {
@@ -16,23 +17,29 @@ public class SetWarpCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (!(sender instanceof Player)) {
-			sender.sendMessage("Only players can execute this command!");
+			MessageService.ConsoleError("Only players can execute this command!");
 			return false;			
 		}
 		
 		Player player = (Player)sender;
 		
 		if (args.length != 1) {
-			sender.sendMessage("Correct usage: /setwarp <name>");
+			MessageService.sendError(sender, "Correct usage: /setwarp <name>");
 			return false;
 		}
 		
 		Warp warp = new Warp(args[0], player.getLocation());
-		WriteYml(warp);
-		return true;
+		
+		boolean success = WriteYml(warp);
+		sender.sendMessage(success ?
+			MessageService.success("Warp " + args[0] + " has been set!") :
+			MessageService.error("Error on setting warp " + args[0] + "!")
+		);
+		
+		return success;
     }
 	
-	public static void WriteYml(Warp warp) {
+	public static boolean WriteYml(Warp warp) {
 		YamlConfiguration config = WarpService.warpYmlFile(warp.getName());
 		config.set("x", warp.getLocation().getBlockX());
 		config.set("y", warp.getLocation().getBlockY());
@@ -42,8 +49,10 @@ public class SetWarpCommand implements CommandExecutor {
 		
 		try {
             config.save(WarpService.warpFile(warp.getName()));
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
 	}
 

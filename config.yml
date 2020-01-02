@@ -1,4 +1,17 @@
+# colors: AQUA BLACK BLUE BOLD DARK_AQUA DARK_BLUE DARK_GRAY DARK_PURPLE DARK_RED GOLD GRAY GREEN LIGHT_PURPLE RED WHITE YELLOW
+# styles: ITALIC MAGIC RED RESET STRIKETHROUGH UNDERLINE
+
 colors:
   success: GREEN
   error: RED
   neutral: WHITE
+
+messages:
+  warp-set: "Warp {warpname} has been set!"
+  warp-teleported: "Teleported to: {warpname}"
+  warp-list: "Warps: {warplist}"
+  setting-warp-error: "Error on setting warp {warpname}!"
+  no-warps-set: "No warp has been set."
+  correct-usage: "Correct usage: {command}"
+  only-players-command: "Only players can execute this command!"
+
