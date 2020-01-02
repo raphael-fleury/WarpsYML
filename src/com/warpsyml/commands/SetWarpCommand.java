@@ -1,6 +1,6 @@
 package com.warpsyml.commands;
 
-import java.io.File;
+import java.io.IOException;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,11 +8,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import com.warpsyml.Main;
 import com.warpsyml.entities.Warp;
+import com.warpsyml.services.WarpService;
 
 public class SetWarpCommand implements CommandExecutor {
 
+	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (!(sender instanceof Player)) {
 			sender.sendMessage("Only players can execute this command!");
@@ -27,19 +28,23 @@ public class SetWarpCommand implements CommandExecutor {
 		}
 		
 		Warp warp = new Warp(args[0], player.getLocation());
-		Main.warps.add(warp);
-		WriteYml(warp, YamlConfiguration.loadConfiguration(new File(Main.plugin.getDataFolder(), "warps.yml")));
+		WriteYml(warp);
 		return true;
     }
 	
-	public static void WriteYml(Warp warp, YamlConfiguration config) {
-		config.set(warp.getName() + ".location.world", warp.getLocation().getWorld().getName());
-		config.set(warp.getName() + ".location.x", warp.getLocation().getX());
-		config.set(warp.getName() + ".location.y", warp.getLocation().getY());
-		config.set(warp.getName() + ".location.z", warp.getLocation().getZ());
-		config.set(warp.getName() + ".location.yaw", warp.getLocation().getYaw());
-		config.set(warp.getName() + ".location.pitch", warp.getLocation().getPitch());
-		Main.plugin.saveResource("warps.yml", true);
+	public static void WriteYml(Warp warp) {
+		YamlConfiguration config = WarpService.warpYmlFile(warp.getName());
+		config.set("x", warp.getLocation().getBlockX());
+		config.set("y", warp.getLocation().getBlockY());
+		config.set("z", warp.getLocation().getBlockZ());
+		config.set("yaw", warp.getLocation().getYaw());
+		config.set("pitch", warp.getLocation().getPitch());
+		
+		try {
+            config.save(WarpService.warpFile(warp.getName()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 }

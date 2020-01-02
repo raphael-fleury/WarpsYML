@@ -1,13 +1,17 @@
 name: WarpsYML
-main: com.warpsyml.Main
+main: com.warpsyml.WarpsYML
 version: 1.0
 author: raphael-fleury
 description: Plugin to manage warps.
 commands:
+   warp:
+      description: Teleport to a warp.
+      permission: warp.teleport
+      usage: /warp <name>
    setwarp:
       description: Set a warp in player's location.
       permission: warp.set
-      usage: /setwarp
+      usage: /setwarp <name>
    warps:
       description: Get a list of warps.
       permission: warp.list

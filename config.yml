@@ -1,0 +1,4 @@
+colors:
+  success: GREEN
+  error: RED
+  neutral: WHITE
