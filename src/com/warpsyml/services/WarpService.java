@@ -18,11 +18,11 @@ public class WarpService {
 	}
 	
 	public static File warpFile(String warpName) {
-		return new File(path(), warpName);
+		return new File(path(), warpName + ".yml");
 	}
 	
 	public static YamlConfiguration warpYmlFile(String warpName) {
-		return YamlConfiguration.loadConfiguration(warpFile(warpName ));
+		return YamlConfiguration.loadConfiguration(warpFile(warpName + ".yml"));
 	}
 	
 	public static ArrayList<String> warpList() {
@@ -60,7 +60,7 @@ public class WarpService {
 	}
 	
 	public static Warp readYml(String warpName) {
-		File path = warpFile(warpName + ".yml");
+		File path = warpFile(warpName);
 		
 		if (!path.exists()) {
 			return null;

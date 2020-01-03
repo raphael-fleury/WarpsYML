@@ -12,6 +12,10 @@ commands:
       description: Set a warp in player's location.
       permission: warp.set
       usage: /setwarp <name>
+   delwarp:
+      description: Delete a warp.
+      permission: warp.delete
+      usage: /delwarp <name>
    warps:
       description: Get a list of warps.
       permission: warp.list

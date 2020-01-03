@@ -22,7 +22,9 @@ public class WarpsCommand implements CommandExecutor {
 		
 		String message = "Warps: ";
 		for(int i = 0; i < warpList.size(); i++) {
-			message += warpList.get(i) + " ";
+			message += warpList.get(i);
+			if (i < warpList.size() - 1)
+				message += ", ";
 		}
 		sender.sendMessage(message);
 		return true;
