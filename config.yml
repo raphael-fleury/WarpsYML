@@ -10,6 +10,7 @@ messages:
   warp-set: "Warp {warpname} has been set!"
   warp-teleported: "Teleported to: {warpname}"
   warp-list: "Warps: {warplist}"
+  loading-warp-error: "Error on loading warp {warpname}!"
   setting-warp-error: "Error on setting warp {warpname}!"
   no-warps-set: "No warp has been set."
   correct-usage: "Correct usage: {command}"

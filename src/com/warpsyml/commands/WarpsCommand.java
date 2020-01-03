@@ -1,10 +1,11 @@
 package com.warpsyml.commands;
 
+import java.util.ArrayList;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import com.warpsyml.entities.Warp;
 import com.warpsyml.services.MessageService;
 import com.warpsyml.services.WarpService;
 
@@ -12,16 +13,16 @@ public class WarpsCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		Warp[] warpList = WarpService.warpList();
+		ArrayList<String> warpList = WarpService.warpList();
 		
-		if(warpList.length < 1) {
+		if(warpList.isEmpty()) {
 			MessageService.sendError(sender, "No warp has been set.");
 			return true;
 		}
 		
 		String message = "Warps: ";
-		for(int i = 0; i < warpList.length; i++) {
-			message += warpList[i].getName() + " ";
+		for(int i = 0; i < warpList.size(); i++) {
+			message += warpList.get(i) + " ";
 		}
 		sender.sendMessage(message);
 		return true;

@@ -26,12 +26,12 @@ public class WarpsYML extends JavaPlugin {
 		MessageService.colors = ColorService.loadColors(getConfig());
 		loadCommands();
 		
-		MessageService.ConsoleSuccess("WarpsYML enabled!");
+		MessageService.consoleSuccess("WarpsYML enabled!");
 		plugin = this;
 	}
 	
 	public void onDisable() {
-		MessageService.ConsoleLog(ChatColor.RED + "WarpsYML disabled!");
+		MessageService.consoleLog(ChatColor.RED + "WarpsYML disabled!");
 	}
 	
 }

@@ -15,7 +15,7 @@ public class ColorService {
             ChatColor color = ChatColor.valueOf(text);
             return color;
         } catch (java.lang.IllegalArgumentException ex) {
-        	MessageService.ConsoleLog("[WarpsYML] " + MessageService.error("Invalid color: " + text));
+        	MessageService.consoleLog("[WarpsYML] " + MessageService.error("Invalid color: " + text));
             return def;
         }
 	}

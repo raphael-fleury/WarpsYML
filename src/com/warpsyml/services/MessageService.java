@@ -18,16 +18,16 @@ public class MessageService {
 		return colors.error + msg;
 	}
 	
-	public static void ConsoleLog(String msg) {
+	public static void consoleLog(String msg) {
 		Bukkit.getConsoleSender().sendMessage(msg);
 	}
 	
-	public static void ConsoleSuccess(String msg) {
-		ConsoleLog(success(msg));
+	public static void consoleSuccess(String msg) {
+		consoleLog(success(msg));
 	}
 	
-	public static void ConsoleError(String msg) {
-		ConsoleLog(error(msg));
+	public static void consoleError(String msg) {
+		consoleLog(error(msg));
 	}
 	
 	public static void sendSuccess(CommandSender sender, String msg) {

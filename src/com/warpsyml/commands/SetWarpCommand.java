@@ -17,7 +17,7 @@ public class SetWarpCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (!(sender instanceof Player)) {
-			MessageService.ConsoleError("Only players can execute this command!");
+			MessageService.consoleError("Only players can execute this command!");
 			return false;			
 		}
 		
@@ -40,7 +40,8 @@ public class SetWarpCommand implements CommandExecutor {
     }
 	
 	public static boolean WriteYml(Warp warp) {
-		YamlConfiguration config = WarpService.warpYmlFile(warp.getName());
+		YamlConfiguration config = WarpService.warpYmlFile(warp.getName() + ".yml");
+		config.set("world", warp.getLocation().getWorld().getName());
 		config.set("x", warp.getLocation().getBlockX());
 		config.set("y", warp.getLocation().getBlockY());
 		config.set("z", warp.getLocation().getBlockZ());
@@ -48,7 +49,7 @@ public class SetWarpCommand implements CommandExecutor {
 		config.set("pitch", warp.getLocation().getPitch());
 		
 		try {
-            config.save(WarpService.warpFile(warp.getName()));
+            config.save(WarpService.warpFile(warp.getName() + ".yml"));
             return true;
         } catch (IOException e) {
             e.printStackTrace();

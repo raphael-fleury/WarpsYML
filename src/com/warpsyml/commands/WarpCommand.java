@@ -14,22 +14,22 @@ public class WarpCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (!(sender instanceof Player)) {
-			MessageService.ConsoleError("Only players can execute this command!");
-			return false;			
+			MessageService.consoleError("Only players can execute this command!");
+			return true;	
 		}
 		
 		Player player = (Player)sender;
 		
 		if (args.length != 1) {
 			MessageService.sendError(sender, "Correct usage: /warp <name>");
-			return false;
+			return true;
 		}
 		
-		Warp warp = WarpService.ReadYml(args[0]);
+		Warp warp = WarpService.readYml(args[0]);
 				
 		if (warp == null) {
 			MessageService.sendError(sender, "Warp " + args[0] + " hasn't been set yet.");
-			return false;
+			return true;
 		}
 		
 		player.teleport(warp.getLocation());
