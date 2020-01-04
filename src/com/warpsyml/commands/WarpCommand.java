@@ -14,26 +14,26 @@ public class WarpCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (!(sender instanceof Player)) {
-			MessageService.consoleError("Only players can execute this command!");
+			MessageService.sendFixedMessage("only-players-command", sender, label);
 			return true;	
 		}
 		
 		Player player = (Player)sender;
 		
 		if (args.length != 1) {
-			MessageService.sendError(sender, "Correct usage: /warp <name>");
+			MessageService.sendFixedMessage("correct-usage", sender, label);
 			return true;
 		}
 		
 		Warp warp = WarpService.readYml(args[0]);
 				
 		if (warp == null) {
-			MessageService.sendError(sender, "Warp " + args[0] + " hasn't been set yet.");
+			MessageService.sendFixedMessage("warp-not-set", sender, label);
 			return true;
 		}
 		
 		player.teleport(warp.getLocation());
-		MessageService.sendSuccess(sender, "Teleported to: " + warp.getName());
+		MessageService.sendFixedMessage("warp-teleported", sender, label);
 		return true;
     }
 }

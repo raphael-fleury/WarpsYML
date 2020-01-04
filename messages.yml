@@ -1,0 +1,23 @@
+# colors: AQUA (&b) BLACK () BLUE BOLD DARK_AQUA DARK_BLUE DARK_GRAY DARK_PURPLE DARK_RED GOLD GRAY GREEN LIGHT_PURPLE RED WHITE YELLOW
+# styles: ITALIC MAGIC RED RESET STRIKETHROUGH UNDERLINE
+
+#plugin (appears only in console)
+on-enable: "§aWarpsYML enabled!"
+on-disable: "§cWarpsYML disabled!"
+
+#errors
+loading-warp-error: "§cError on loading warp §6{warpname}!"
+setting-warp-error: "§cError on setting warp §6{warpname}!"
+deleting-warp-error: "§cCould not delete warp §6{warpname}!"
+correct-usage: "§cCorrect usage: {commandusage}"
+only-players-command: "§cOnly players can execute this command!"
+
+#commands
+warp-set: "§aWarp §6{warpname} §ahas been set!"
+warp-set-broadcast: "§6{playername} §fset warp §6{warpname}§f at §6{warplocation}!"
+warp-deleted: "Warp §6{warpname} deleted successfully!"
+warp-deleted-broadcast: "§6{playername} §fdeleted warp §6{warpname}!"
+warp-teleported: "§aTeleported to: §6{warpname}"
+warp-list: "§fWarps: §6{warplist}"
+warp-not-set: "§cWarp §6{warpname}§c hasn't been set yet."
+no-warps-set: "§cNo warp has been set."

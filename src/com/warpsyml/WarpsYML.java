@@ -1,13 +1,11 @@
 package com.warpsyml;
 
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.warpsyml.commands.DelWarpCommand;
 import com.warpsyml.commands.SetWarpCommand;
 import com.warpsyml.commands.WarpCommand;
 import com.warpsyml.commands.WarpsCommand;
-import com.warpsyml.services.ColorService;
 import com.warpsyml.services.MessageService;
 
 public class WarpsYML extends JavaPlugin {
@@ -22,18 +20,18 @@ public class WarpsYML extends JavaPlugin {
 	}
 	
 	public void onEnable() {
+		plugin = this;
+		loadCommands();
+		
 		getConfig().options().copyDefaults(true);
 		saveDefaultConfig();
 		
-		MessageService.colors = ColorService.loadColors(getConfig());
-		loadCommands();
-		
-		MessageService.consoleSuccess("WarpsYML enabled!");
-		plugin = this;
+		saveResource("messages.yml", false);
+		MessageService.consoleLog("on-enable");		
 	}
 	
 	public void onDisable() {
-		MessageService.consoleLog(ChatColor.RED + "WarpsYML disabled!");
+		MessageService.consoleLog("on-disable");
 	}
 	
 }

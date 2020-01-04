@@ -49,7 +49,7 @@ public class WarpService {
 				String name = list.get(i).replaceAll(".yml", "");
 				Warp warp = readYml(name);
 				if (warp == null) {
-					MessageService.consoleError("Error on loading warp " + list.get(i));
+					MessageService.consoleLog("loading-warp-error");
 				}
 				else {
 					warps.add(warp);
@@ -79,7 +79,6 @@ public class WarpService {
 			));
 		}
 		catch (Exception e) {
-			MessageService.consoleError("Error on loading warp " + warpName);
 			return null;
 		}
 	}

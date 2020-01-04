@@ -13,20 +13,20 @@ public class DelWarpCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if (args.length != 1) {
-			MessageService.sendError(sender, "Correct usage: /setwarp <name>");
+		if (args.length != 1) {		
+			MessageService.sendFixedMessage("correct-usage", sender, label);
 			return true;
 		}
 		
 		File file = WarpService.warpFile(args[0]);
 		
 		if (!file.exists())
-			MessageService.sendError(sender, "Warp " + args[0] + " hasn't been set yet.");
+			MessageService.sendFixedMessage("warp-not-set", sender, label);
 		else {
 			if (file.delete())
-				MessageService.sendSuccess(sender, "Warp " + args[0] + " deleted successfully!");
+				MessageService.sendFixedMessage("warp-deleted", sender, label);
 			else
-				MessageService.sendError(sender, "Could not delete warp " + args[0] + "!");
+				MessageService.sendFixedMessage("deleting-warp-error", sender, label);
 		}
 		
 		return true;

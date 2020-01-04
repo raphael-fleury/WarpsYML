@@ -16,7 +16,7 @@ public class WarpsCommand implements CommandExecutor {
 		ArrayList<String> warpList = WarpService.warpList();
 		
 		if(warpList.isEmpty()) {
-			MessageService.sendError(sender, "No warp has been set.");
+			MessageService.sendFixedMessage("no-warps-set", sender, label);
 			return true;
 		}
 		

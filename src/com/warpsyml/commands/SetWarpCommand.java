@@ -17,28 +17,28 @@ public class SetWarpCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (!(sender instanceof Player)) {
-			MessageService.consoleError("Only players can execute this command!");
+			MessageService.sendFixedMessage("only-players-command", sender, label);
 			return true;	
 		}
 		
 		Player player = (Player)sender;
 		
 		if (args.length != 1) {
-			MessageService.sendError(sender, "Correct usage: /setwarp <name>");
+			MessageService.sendFixedMessage("correct-usage", sender, label);
 			return true;
 		}
 		
 		Warp warp = new Warp(args[0], player.getLocation());
 		
-		sender.sendMessage(WriteYml(warp) ?
-			MessageService.success("Warp " + args[0] + " has been set!") :
-			MessageService.error("Error on setting warp " + args[0] + "!")
+		sender.sendMessage(writeYml(warp) ?
+			MessageService.getFixedMessage("warp-set", sender, label, args[0]) :
+			MessageService.getFixedMessage("setting-warp-error", sender, label, args[0])
 		);
 		
 		return true;
     }
 	
-	public static boolean WriteYml(Warp warp) {
+	public static boolean writeYml(Warp warp) {
 		YamlConfiguration config = WarpService.warpYmlFile(warp.getName() + ".yml");
 		config.set("world", warp.getLocation().getWorld().getName());
 		config.set("x", warp.getLocation().getBlockX());
