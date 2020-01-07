@@ -2,6 +2,8 @@ package com.warpsyml.entities;
 
 import org.bukkit.Location;
 
+import com.warpsyml.services.WarpService;
+
 public class Warp {
 
 	private String name;
@@ -15,7 +17,18 @@ public class Warp {
 	public String getName() { return name; }
 	public Location getLocation() { return location; }
 
+	public String getLocationToString() {
+		return location.getWorld().getName() + ", " +
+			location.getX() + ", " + 
+			location.getY() + ", " + 
+			location.getZ();
+	}
+	
 	public String toString() {
-		return name + ": " + location.toString();
+		return name + ": " + getLocationToString();
+	}
+	
+	public boolean exists() {
+		return WarpService.getWarp(name) != null;
 	}
 }

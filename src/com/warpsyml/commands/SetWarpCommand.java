@@ -8,38 +8,42 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import com.warpsyml.entities.CustomCommand;
+import com.warpsyml.entities.CustomWarpCommand;
 import com.warpsyml.entities.Warp;
-import com.warpsyml.services.MessageService;
 import com.warpsyml.services.WarpService;
 
 public class SetWarpCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		CustomCommand cmd = new CustomCommand(sender, label);
+		
 		if (!(sender instanceof Player)) {
-			MessageService.sendFixedMessage("only-players-command", sender, label);
+			cmd.sendMessage("only-players-command");
 			return true;	
 		}
 		
 		Player player = (Player)sender;
 		
 		if (args.length != 1) {
-			MessageService.sendFixedMessage("correct-usage", sender, label);
+			cmd.sendMessage("correct-usage");
 			return true;
 		}
 		
 		Warp warp = new Warp(args[0], player.getLocation());
+		cmd = new CustomWarpCommand(sender, label, warp);
 		
 		sender.sendMessage(writeYml(warp) ?
-			MessageService.getFixedMessage("warp-set", sender, label, args[0]) :
-			MessageService.getFixedMessage("setting-warp-error", sender, label, args[0])
+			cmd.getMessage("warp-set") :
+			cmd.getMessage("setting-warp-error")
 		);
 		
 		return true;
     }
 	
 	public static boolean writeYml(Warp warp) {
-		YamlConfiguration config = WarpService.warpYmlFile(warp.getName() + ".yml");
+		YamlConfiguration config = WarpService.getYml(warp.getName() + ".yml");
 		config.set("world", warp.getLocation().getWorld().getName());
 		config.set("x", warp.getLocation().getBlockX());
 		config.set("y", warp.getLocation().getBlockY());
@@ -48,7 +52,7 @@ public class SetWarpCommand implements CommandExecutor {
 		config.set("pitch", warp.getLocation().getPitch());
 		
 		try {
-            config.save(WarpService.warpFile(warp.getName()));
+            config.save(WarpService.getFile(warp.getName()));
             return true;
         } catch (IOException e) {
             e.printStackTrace();

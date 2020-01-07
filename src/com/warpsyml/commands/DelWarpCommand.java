@@ -6,27 +6,37 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import com.warpsyml.services.MessageService;
+import com.warpsyml.entities.CustomCommand;
+import com.warpsyml.entities.CustomWarpCommand;
 import com.warpsyml.services.WarpService;
 
 public class DelWarpCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		CustomCommand cmd = new CustomCommand(sender, label);
+		
 		if (args.length != 1) {		
-			MessageService.sendFixedMessage("correct-usage", sender, label);
+			cmd.sendMessage("correct-usage");
 			return true;
 		}
 		
-		File file = WarpService.warpFile(args[0]);
+		File file = WarpService.getFile(args[0]);
+		try {
+			cmd = new CustomWarpCommand(sender, label, args[0]);
+		}
+		catch (Exception e) {
+			cmd.sendMessage("warp-not-set");
+			return true;
+		}
 		
 		if (!file.exists())
-			MessageService.sendFixedMessage("warp-not-set", sender, label);
+			cmd.sendMessage("warp-not-set");
 		else {
 			if (file.delete())
-				MessageService.sendFixedMessage("warp-deleted", sender, label);
+				cmd.sendMessage("warp-deleted");
 			else
-				MessageService.sendFixedMessage("deleting-warp-error", sender, label);
+				cmd.sendMessage("deleting-warp-error");
 		}
 		
 		return true;

@@ -5,35 +5,39 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.warpsyml.entities.CustomCommand;
+import com.warpsyml.entities.CustomWarpCommand;
 import com.warpsyml.entities.Warp;
-import com.warpsyml.services.MessageService;
 import com.warpsyml.services.WarpService;
 
 public class WarpCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		CustomCommand cmd = new CustomCommand(sender, label);
+		
 		if (!(sender instanceof Player)) {
-			MessageService.sendFixedMessage("only-players-command", sender, label);
+			cmd.sendMessage("only-players-command");
 			return true;	
 		}
 		
 		Player player = (Player)sender;
 		
 		if (args.length != 1) {
-			MessageService.sendFixedMessage("correct-usage", sender, label);
+			cmd.sendMessage("correct-usage");
 			return true;
 		}
 		
-		Warp warp = WarpService.readYml(args[0]);
+		Warp warp = WarpService.getWarp(args[0]);
+		cmd = new CustomWarpCommand(sender, label, warp);
 				
 		if (warp == null) {
-			MessageService.sendFixedMessage("warp-not-set", sender, label);
+			cmd.sendMessage("warp-not-set");
 			return true;
 		}
 		
 		player.teleport(warp.getLocation());
-		MessageService.sendFixedMessage("warp-teleported", sender, label);
+		cmd.sendMessage("warp-teleported");
 		return true;
     }
 }
