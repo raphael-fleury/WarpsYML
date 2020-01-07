@@ -8,17 +8,17 @@ import com.warpsyml.services.WarpService;
 public class CustomCommand {
 	
 	protected CommandSender sender;
-	protected String label;
+	protected String usage;
 	
-	public CustomCommand(CommandSender sender, String label) {
+	public CustomCommand(CommandSender sender, String usage) {
 		this.sender = sender;
-		this.label = label;
+		this.usage = usage;
 	}
 	
 	public String getMessage(String key) {
 		String string = MessageService.getMessage(key);
 		string = string.replaceAll("%warplist%", WarpService.getListToString());
-		string = string.replaceAll("%commandusage%", label);
+		string = string.replaceAll("%commandusage%", usage);
 		string = string.replaceAll("%playername%", (sender instanceof Player) ?
 				sender.getName() : "Console");
 		return string;
@@ -26,5 +26,9 @@ public class CustomCommand {
 	
 	public void sendMessage(String key) {
 		sender.sendMessage(getMessage(key));
+	}
+	
+	public void sendMessage(String key, String warpName) {
+		sender.sendMessage(getMessage(key).replaceAll("%warpname%", warpName));
 	}
 }

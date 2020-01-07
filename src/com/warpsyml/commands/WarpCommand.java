@@ -12,9 +12,11 @@ import com.warpsyml.services.WarpService;
 
 public class WarpCommand implements CommandExecutor {
 
+	private String usage = "/warp <warp>";
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		CustomCommand cmd = new CustomCommand(sender, label);
+		CustomCommand cmd = new CustomCommand(sender, usage);
 		
 		if (!(sender instanceof Player)) {
 			cmd.sendMessage("only-players-command");
@@ -29,7 +31,7 @@ public class WarpCommand implements CommandExecutor {
 		}
 		
 		Warp warp = WarpService.getWarp(args[0]);
-		cmd = new CustomWarpCommand(sender, label, warp);
+		cmd = new CustomWarpCommand(sender, usage, warp);
 				
 		if (warp == null) {
 			cmd.sendMessage("warp-not-set");

@@ -9,9 +9,11 @@ import com.warpsyml.services.WarpService;
 
 public class WarpsCommand implements CommandExecutor {
 	
+	private String usage = "/warps";
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		CustomCommand cmd = new CustomCommand(sender, label);
+		CustomCommand cmd = new CustomCommand(sender, usage);
 		
 		if(WarpService.noWarps()) {
 			cmd.sendMessage("no-warps-set");

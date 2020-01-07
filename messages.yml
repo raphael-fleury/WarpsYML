@@ -20,12 +20,12 @@ deleting-warp-error: "§cCould not delete warp §6%warpname%!"
 #command-errors
 correct-usage: "§cCorrect usage: %commandusage%"
 only-players-command: "§cOnly players can execute this command!"
-no-permission: 
+no-permission: "§cYou don't have permission for this!"
 
 #commands
 warp-set: "§aWarp §6%warpname% §ahas been set!"
 warp-set-broadcast: "§6%playername% §fset warp §6%warpname%§f at §6%warplocation%!"
-warp-deleted: "§aWarp §6%warpname% deleted successfully!"
+warp-deleted: "§aWarp §6%warpname% §adeleted successfully!"
 warp-deleted-broadcast: "§6%playername% §fdeleted warp §6%warpname%!"
 warp-teleported: "§aTeleported to: §6%warpname%"
 warp-list: "§eWarps: §6%warplist%"

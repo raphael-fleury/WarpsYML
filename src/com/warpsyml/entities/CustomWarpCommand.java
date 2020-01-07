@@ -9,13 +9,13 @@ public class CustomWarpCommand extends CustomCommand {
 
 	private Warp warp;
 	
-	public CustomWarpCommand(CommandSender sender, String label, Warp warp) {
-		super(sender, label);
+	public CustomWarpCommand(CommandSender sender, String usage, Warp warp) {
+		super(sender, usage);
 		this.warp = warp;
 	}
 	
-	public CustomWarpCommand(CommandSender sender, String label, String warp) throws Exception {
-		super(sender, label);
+	public CustomWarpCommand(CommandSender sender, String usage, String warp) throws Exception {
+		super(sender, usage);
 		this.warp = WarpService.getWarp(warp);
 		if (this.warp == null) {
 			throw new Exception(MessageService.getMessage("warp-not-set"));

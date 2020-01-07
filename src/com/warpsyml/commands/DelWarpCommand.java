@@ -12,9 +12,11 @@ import com.warpsyml.services.WarpService;
 
 public class DelWarpCommand implements CommandExecutor {
 
+	private String usage = "/delwarp <warp>";
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		CustomCommand cmd = new CustomCommand(sender, label);
+		CustomCommand cmd = new CustomCommand(sender, usage);
 		
 		if (args.length != 1) {		
 			cmd.sendMessage("correct-usage");
@@ -23,21 +25,17 @@ public class DelWarpCommand implements CommandExecutor {
 		
 		File file = WarpService.getFile(args[0]);
 		try {
-			cmd = new CustomWarpCommand(sender, label, args[0]);
+			cmd = new CustomWarpCommand(sender, usage, args[0]);
 		}
 		catch (Exception e) {
-			cmd.sendMessage("warp-not-set");
+			cmd.sendMessage("warp-not-set", args[0]);
 			return true;
 		}
 		
-		if (!file.exists())
-			cmd.sendMessage("warp-not-set");
-		else {
-			if (file.delete())
-				cmd.sendMessage("warp-deleted");
-			else
-				cmd.sendMessage("deleting-warp-error");
-		}
+		if (file.delete())
+			cmd.sendMessage("warp-deleted");
+		else
+			cmd.sendMessage("deleting-warp-error");
 		
 		return true;
     }
