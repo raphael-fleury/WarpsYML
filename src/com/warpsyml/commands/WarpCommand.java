@@ -18,6 +18,11 @@ public class WarpCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		CustomCommand cmd = new CustomCommand(sender, usage);
 		
+		if(!sender.hasPermission("warp.teleport")) {
+			cmd.sendMessage("no-permission");
+			return true;
+		}
+		
 		if (!(sender instanceof Player)) {
 			cmd.sendMessage("only-players-command");
 			return true;	
@@ -30,11 +35,17 @@ public class WarpCommand implements CommandExecutor {
 			return true;
 		}
 		
-		Warp warp = WarpService.getWarp(args[0]);
-		cmd = new CustomWarpCommand(sender, usage, warp);
+		try {
+			cmd = new CustomWarpCommand(sender, usage, args[0]);
+		}
+		catch (Exception e) {
+			cmd.sendMessage("warp-not-set", args[0]);
+			return true;
+		}
 				
+		Warp warp = WarpService.getWarp(args[0]);
 		if (warp == null) {
-			cmd.sendMessage("warp-not-set");
+			cmd.sendMessage("warp-not-set", args[0]);
 			return true;
 		}
 		

@@ -15,6 +15,11 @@ public class WarpsCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		CustomCommand cmd = new CustomCommand(sender, usage);
 		
+		if(!sender.hasPermission("warp.list")) {
+			cmd.sendMessage("no-permission");
+			return true;
+		}
+		
 		if(WarpService.noWarps()) {
 			cmd.sendMessage("no-warps-set");
 			return true;

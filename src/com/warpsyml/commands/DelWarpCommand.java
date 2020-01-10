@@ -18,6 +18,11 @@ public class DelWarpCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		CustomCommand cmd = new CustomCommand(sender, usage);
 		
+		if(!sender.hasPermission("warp.delete")) {
+			cmd.sendMessage("no-permission");
+			return true;
+		}
+		
 		if (args.length != 1) {		
 			cmd.sendMessage("correct-usage");
 			return true;

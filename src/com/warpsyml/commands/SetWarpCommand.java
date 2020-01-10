@@ -21,6 +21,11 @@ public class SetWarpCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		CustomCommand cmd = new CustomCommand(sender, usage);
 		
+		if(!sender.hasPermission("warp.set")) {
+			cmd.sendMessage("no-permission");
+			return true;
+		}
+		
 		if (!(sender instanceof Player)) {
 			cmd.sendMessage("only-players-command");
 			return true;	
