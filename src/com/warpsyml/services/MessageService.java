@@ -5,6 +5,7 @@ import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import com.warpsyml.WarpsYML;
 
@@ -33,9 +34,14 @@ public class MessageService {
 		Bukkit.getConsoleSender().sendMessage(getMessage(key));
 	}
 	
-	
 	public static void sendMessage(String key, CommandSender sender) {
 		sender.sendMessage(getMessage(key));
+	}
+	
+	public static void broadcast(String msg) {
+		for (Player player: Bukkit.getServer().getOnlinePlayers()) {
+			player.sendMessage(msg);
+		}
 	}
 
 }

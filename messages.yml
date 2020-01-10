@@ -24,9 +24,9 @@ no-permission: "§cYou don't have permission for this!"
 
 #commands
 warp-set: "§aWarp §6%warpname% §ahas been set!"
-warp-set-broadcast: "§6%playername% §fset warp §6%warpname%§f at §6%warplocation%!"
+warp-set-broadcast: "§6%playername% §eset warp §6%warpname%§e at §6%warplocation%§e!"
 warp-deleted: "§aWarp §6%warpname% §adeleted successfully!"
-warp-deleted-broadcast: "§6%playername% §fdeleted warp §6%warpname%!"
+warp-deleted-broadcast: "§6%playername% §edeleted warp §6%warpname%!"
 warp-teleported: "§aTeleported to: §6%warpname%"
 warp-list: "§eWarps: §6%warplist%"
 warp-list-separator: ", "

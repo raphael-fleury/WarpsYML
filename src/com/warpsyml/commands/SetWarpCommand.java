@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import com.warpsyml.WarpsYML;
 import com.warpsyml.entities.CustomCommand;
 import com.warpsyml.entities.CustomWarpCommand;
 import com.warpsyml.entities.Warp;
@@ -41,10 +42,15 @@ public class SetWarpCommand implements CommandExecutor {
 		Warp warp = new Warp(args[0], player.getLocation());
 		cmd = new CustomWarpCommand(sender, usage, warp);
 		
-		sender.sendMessage(writeYml(warp) ?
+		boolean success = writeYml(warp);
+		
+		sender.sendMessage(success ?
 			cmd.getMessage("warp-set") :
 			cmd.getMessage("setting-warp-error")
 		);
+		
+		if (success && WarpsYML.plugin.getConfig().getBoolean("broadcast-on-setting-warp"))
+			cmd.broadcast("warp-set-broadcast");
 		
 		return true;
     }

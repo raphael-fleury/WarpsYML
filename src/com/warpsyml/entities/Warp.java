@@ -19,9 +19,9 @@ public class Warp {
 
 	public String getLocationToString() {
 		return location.getWorld().getName() + ", " +
-			location.getX() + ", " + 
-			location.getY() + ", " + 
-			location.getZ();
+			Math.round(location.getX()) + ", " + 
+			Math.round(location.getY()) + ", " + 
+			Math.round(location.getZ());
 	}
 	
 	public String toString() {

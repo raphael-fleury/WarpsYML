@@ -31,4 +31,8 @@ public class CustomCommand {
 	public void sendMessage(String key, String warpName) {
 		sender.sendMessage(getMessage(key).replaceAll("%warpname%", warpName));
 	}
+	
+	public void broadcast(String key) {
+		MessageService.broadcast(getMessage(key));
+	}
 }

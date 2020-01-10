@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import com.warpsyml.WarpsYML;
 import com.warpsyml.entities.CustomCommand;
 import com.warpsyml.entities.CustomWarpCommand;
 import com.warpsyml.services.WarpService;
@@ -37,8 +38,11 @@ public class DelWarpCommand implements CommandExecutor {
 			return true;
 		}
 		
-		if (file.delete())
+		if (file.delete()) {
 			cmd.sendMessage("warp-deleted");
+			if(WarpsYML.plugin.getConfig().getBoolean("broadcast-on-deleting-warp"))
+				cmd.broadcast("warp-deleted-broadcast");
+		}			
 		else
 			cmd.sendMessage("deleting-warp-error");
 		
